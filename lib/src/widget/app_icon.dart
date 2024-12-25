@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:iconsinflutter/src/utils/vec_asset_bundle.dart';
+import 'package:iconsinflutter/src/utils/caching_asset_bytes_loader.dart';
 import 'package:vector_graphics/vector_graphics.dart';
 
 /// Icon that follows your guidelines for app icons.
@@ -13,7 +13,7 @@ class AppIcon extends StatelessWidget {
   final AppIconProvider provider;
 
   /// Creates an icon from a vector graphics file.
-  /// 
+  ///
   /// The [path] should point to a .vec file.
   factory AppIcon.vectorGraphics(
     String path, {
@@ -108,7 +108,6 @@ final class AppIconProviderIconfont extends AppIconProvider {
         size: size.value,
         color: color,
         semanticLabel: semanticsLabel,
-        shadows: const [],
       );
 }
 
@@ -127,7 +126,7 @@ final class AppIconProviderVectorGraphics extends AppIconProvider {
 
   @override
   Widget buildIcon() => VectorGraphic(
-        loader: AssetBytesLoader(path, assetBundle: vecAssetBundle),
+        loader: CachingAssetBytesLoader(path),
         colorFilter: colorFilter,
         width: size.value,
         height: size.value,
@@ -151,7 +150,6 @@ final class AppIconProviderSvg extends AppIconProvider {
   @override
   Widget buildIcon() => SvgPicture.asset(
         path,
-        bundle: vecAssetBundle,
         colorFilter: colorFilter,
         width: size.value,
         height: size.value,

@@ -27,7 +27,7 @@ use_references_list: false
 #   file_name: my_fonts
 
 # Location where all the generated references will be stored
-package: resources
+package: src/constant/resources
 
 groups:
   - path: assets/vec
