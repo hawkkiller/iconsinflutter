@@ -8,21 +8,13 @@ import 'package:iconsinflutter/src/widget/app_icon.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  final stopwatch = Stopwatch()..start();
-  for (final icon in SvgIconsPreview._assets) {
+  for (final icon in SvgIcons.values) {
     await SvgAssetLoader(icon).loadBytes(null);
   }
-  stopwatch.stop();
-  print('Loaded ${SvgIconsPreview._assets.length} SVG icons in ${stopwatch.elapsedMilliseconds}ms');
 
-  final stopwatch2 = Stopwatch()..start();
-  for (final icon in VectorGraphicsPreview._assets) {
+  for (final icon in Vectors.values) {
     await CachingAssetBytesLoader(icon).loadBytes(null);
   }
-  stopwatch2.stop();
-  print(
-    'Loaded ${VectorGraphicsPreview._assets.length} vector graphics in ${stopwatch2.elapsedMilliseconds}ms',
-  );
 
   runApp(const MainApp());
 }
@@ -31,25 +23,23 @@ class MainApp extends StatelessWidget {
   const MainApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: SingleChildScrollView(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const IconfontGeneratorPreview(),
-              const SizedBox(width: 16),
-              const VectorGraphicsPreview(),
-              const SizedBox(width: 16),
-              const SvgIconsPreview(),
-            ],
+  Widget build(BuildContext context) => const MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(
+          body: SingleChildScrollView(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconfontGeneratorPreview(),
+                SizedBox(width: 16),
+                VectorGraphicsPreview(),
+                SizedBox(width: 16),
+                SvgIconsPreview(),
+              ],
+            ),
           ),
         ),
-      ),
-    );
-  }
+      );
 }
 
 class IconfontGeneratorPreview extends StatelessWidget {
@@ -117,44 +107,10 @@ class IconfontGeneratorPreview extends StatelessWidget {
 class VectorGraphicsPreview extends StatelessWidget {
   const VectorGraphicsPreview({super.key});
 
-  static const _assets = [
-    Vectors.addSvg,
-    Vectors.arrowBackSvg,
-    Vectors.cancelSvg,
-    Vectors.closeSvg,
-    Vectors.deleteSvg,
-    Vectors.homeSvg,
-    Vectors.menuSvg,
-    Vectors.searchSvg,
-    Vectors.settingsSvg,
-    Vectors.starSvg,
-    Vectors.binFilledNonzeroSvg,
-    Vectors.binFilledEvenoddSvg,
-    Vectors.transformationsSvg,
-    Vectors.pantsSvg,
-    Vectors.appRegistrationSvg,
-    Vectors.exitToAppSvg,
-    Vectors.startSvg,
-    Vectors.redoSvg,
-    Vectors.arrowCircleUpSvg,
-    Vectors.downloadForOfflineSvg,
-    Vectors.unfoldMoreSvg,
-    Vectors.selectCheckBoxSvg,
-    Vectors.fullscreenExitSvg,
-    Vectors.switchAccessShortcutSvg,
-    Vectors.iosShareSvg,
-    Vectors.htmlSvg,
-    Vectors.forwardSvg,
-    Vectors.openWithSvg,
-    Vectors.keyboardDoubleArrowDownSvg,
-    Vectors.arrowCircleDropUpSvg,
-    Vectors.settingsApplicationsSvg,
-  ];
-
   @override
   Widget build(BuildContext context) => Column(
         children: [
-          for (final asset in _assets)
+          for (final asset in Vectors.values)
             AppIcon.vectorGraphics(
               asset,
               size: AppIconSize.large,
@@ -167,44 +123,10 @@ class VectorGraphicsPreview extends StatelessWidget {
 class SvgIconsPreview extends StatelessWidget {
   const SvgIconsPreview({super.key});
 
-  static const _assets = [
-    SvgIcons.add,
-    SvgIcons.arrowBack,
-    SvgIcons.cancel,
-    SvgIcons.close,
-    SvgIcons.delete,
-    SvgIcons.home,
-    SvgIcons.menu,
-    SvgIcons.search,
-    SvgIcons.settings,
-    SvgIcons.star,
-    SvgIcons.binFilledEvenodd,
-    SvgIcons.binFilledNonzero,
-    SvgIcons.transformations,
-    SvgIcons.pants,
-    SvgIcons.appRegistration,
-    SvgIcons.exitToApp,
-    SvgIcons.start,
-    SvgIcons.redo,
-    SvgIcons.arrowCircleUp,
-    SvgIcons.downloadForOffline,
-    SvgIcons.unfoldMore,
-    SvgIcons.selectCheckBox,
-    SvgIcons.fullscreenExit,
-    SvgIcons.switchAccessShortcut,
-    SvgIcons.iosShare,
-    SvgIcons.html,
-    SvgIcons.forward,
-    SvgIcons.openWith,
-    SvgIcons.keyboardDoubleArrowDown,
-    SvgIcons.arrowCircleDropUp,
-    SvgIcons.settingsApplications,
-  ];
-
   @override
   Widget build(BuildContext context) => Column(
         children: [
-          for (final asset in _assets)
+          for (final asset in SvgIcons.values)
             AppIcon.svg(
               asset,
               size: AppIconSize.large,
